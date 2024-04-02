@@ -38,7 +38,7 @@ app.use((err, req, res, next) => {
 
 // Serve static files from the React frontend app in production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('frontend/dist'));
+    app.use(express.static('frontend/dist/index.html'));
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
     });
