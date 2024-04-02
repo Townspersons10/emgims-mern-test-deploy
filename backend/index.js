@@ -12,16 +12,6 @@ dotenv.config();
 
 const app = express();
 
-// Convert the file URL to a file path
-// __filename and __dirname do not exist in ES modules, so we create them
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Then you can use __dirname as before
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
-});
 
 const PORT = process.env.PORT || 5555;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
@@ -45,4 +35,15 @@ app.use('/employee', employeeRoute);
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
+});
+
+// Convert the file URL to a file path
+// __filename and __dirname do not exist in ES modules, so we create them
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Then you can use __dirname as before
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
 });
