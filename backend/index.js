@@ -11,6 +11,13 @@ dotenv.config();
 
 const app = express();
 
+// Serve static files from the React app build output
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
+
+// Handle SPA routing by returning the index.html for any unknown routes
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
+});
 
 const PORT = process.env.PORT || 5555;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
@@ -35,11 +42,3 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
-
-// Serve static files from the React frontend app in production
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('frontend/dist/index.html'));
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
-    });
-}
