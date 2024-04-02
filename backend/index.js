@@ -1,49 +1,44 @@
-// Importing necessary libraries and modules
-import express from 'express'; // Main Express web server framework
-import cors from 'cors'; // Middleware to enable CORS (Cross-Origin Resource Sharing)
-import mongoose from 'mongoose'; // MongoDB object modeling tool
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
 import { PersonInventory } from './models/personInventoryModel.js'; // Importing the Book model
-import employeeRoute from './routes/employeeRoute.js'; // Routes for book operations
-import { PORT, mongoDBURL } from './config.js'; // Importing configurations such as PORT and MongoDB URL
+import employeeRoute from './routes/employeeRoute.js';
+import path from 'path';
+import dotenv from 'dotenv'
 
-// Creating an Express application
+dotenv.config();
+
+
 const app = express();
 
-// Middleware for parsing JSON bodies in requests
-app.use(express.json());
+const PORT = process.env.PORT || 5555;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-// Middleware for handling CORS Policy
-// Option one: Allow all origins
+
+// Attempt to connect to MongoDB
+mongoose.connect(process.env.mongoDBURL)
+    .then(() => console.log('Successfully connected to MongoDB.'))
+    .catch(err => console.error('Connection error', err));
+
+
+
+app.use(express.json());
 app.use(cors());
 
-// Option two: Allow custom origins (currently commented out to use option one)
-// app.use(
-//     cors({
-//         origin: 'http://localhost:3000', // Specify allowed origin
-//         methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
-//         allowedHeaders: ['Content-Type'], // Specify allowed headers
-//     })
-// );
+app.get('/', (req, res) => res.send('Welcome to the Employee Inventory Management System!'));
 
-// Test route to confirm server is running
-app.get('/', (request, response) => {
-    console.log(request); // Logging the request object for debugging
-    return response.status(234).send('Welcome!'); // Sending a custom welcome message with a status code
-});
-
-// Using book routes for any requests to '/books'
 app.use('/employee', employeeRoute);
 
-// Connecting to the MongoDB database and starting the server
-// The server only starts if the database connection is successful
-mongoose
-    .connect(mongoDBURL) // Connecting to MongoDB using the URL from config
-    .then(() => {
-        console.log('Connected to database'); // Log on successful connection
-        app.listen(PORT, () => { // Start listening for requests on configured PORT
-            console.log(`Server is listening on port: ${PORT}`); // Confirmation log
-        });
-    })
-    .catch((error) => {
-        console.log(error); // Log any errors that occur during connection
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
+
+// Serve static files from the React frontend app in production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('frontend/build'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
     });
+}
