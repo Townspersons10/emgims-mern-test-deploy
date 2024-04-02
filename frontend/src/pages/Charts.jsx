@@ -21,7 +21,7 @@ const Charts = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get('https://hiroharuharku-a3bf081dd17c.herokuapp.com//employee')
+        axios.get('https://hiroharuharku-a3bf081dd17c.herokuapp.com/employee')
             .then((response) => {
                 setEmployees(response.data.data);
                 setLoading(false);
