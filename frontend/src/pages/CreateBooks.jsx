@@ -27,7 +27,7 @@ const CreatePerson = () => {
 
         setLoading(true);
         axios
-            .post('http://localhost:5555/employee', data) // Adjust the endpoint accordingly
+            .post('https://hiroharuharku-a3bf081dd17c.herokuapp.com//employee', data) // Adjust the endpoint accordingly
             .then(() => {
                 setLoading(false);
                 navigate('/'); // Adjust the navigation target if necessary

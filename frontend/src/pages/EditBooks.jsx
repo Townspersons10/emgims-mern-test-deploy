@@ -28,9 +28,9 @@ const EditPersonInventory = () => {
 
     const handleEditPersonInventory = () => {
         const data = { name, inventoryItems };
-        
+
         setLoading(true);
-        axios.put(`http://localhost:5555/employee/${id}`, data)
+        axios.put(`https://hiroharuharku-a3bf081dd17c.herokuapp.com//employee/${id}`, data)
             .then(() => {
                 setLoading(false);
                 navigate('/');
