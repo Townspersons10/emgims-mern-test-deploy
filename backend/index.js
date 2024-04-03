@@ -7,7 +7,6 @@ import employeeRoute from './routes/employeeRoute.js';
 import path from 'path';
 import dotenv from 'dotenv'
 import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 
 dotenv.config();
 
