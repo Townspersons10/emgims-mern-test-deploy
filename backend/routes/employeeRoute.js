@@ -1,6 +1,7 @@
 import express from 'express';
 import { PersonInventory } from '../models/personInventoryModel.js'; // Importing the PersonInventory model
 
+
 const router = express.Router();
 
 // Route to create a new person inventory entry in the database

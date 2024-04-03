@@ -26,7 +26,6 @@ app.use(cors());
 
 app.get('/', (req, res) => res.send('Welcome to the Employee Inventory Management System!'));
 
-app.use('/', routes)
 app.use('/employee', employeeRoute);
 
 // Error handling middleware
