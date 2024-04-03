@@ -3,17 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "engines": {
     "node": "16.17.0"
   },
   "dependencies": {
-    "node": "^18.20.0",
     "node": "16.17.0",
-    "vite": "^5.2.7",    
-    "@vitejs/plugin-react": "^3.0.0"
+    "vite": "^4.3.5"
   }
 }
