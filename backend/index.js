@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.get('/', (req, res) => res.send('Welcome to the Employee Inventory Management System!'));
 
-app.use('/employee', express.static(path.join(__dirname,"/employee")));
+app.use('/employee', employeeRoute);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
