@@ -11,14 +11,11 @@ dotenv.config();
 
 
 const app = express();
-
-
 const PORT = process.env.PORT || 5555;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 
 // Attempt to connect to MongoDB
-mongoose.connect(process.env.mongoDBURL)
+mongoose.connect(process.env.mongoDB_URI)
     .then(() => console.log('Successfully connected to MongoDB.'))
     .catch(err => console.error('Connection error', err));
 
@@ -29,6 +26,7 @@ app.use(cors());
 
 app.get('/', (req, res) => res.send('Welcome to the Employee Inventory Management System!'));
 
+app.use('/', routes)
 app.use('/employee', employeeRoute);
 
 // Error handling middleware
@@ -37,13 +35,15 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-// Convert the file URL to a file path
-// __filename and __dirname do not exist in ES modules, so we create them
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// Then you can use __dirname as before
-app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static( 'frontend/dist'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
+    });
+}
+
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
