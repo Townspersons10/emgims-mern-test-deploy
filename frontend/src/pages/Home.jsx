@@ -21,7 +21,7 @@ export const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('https://mern-stack-acc-61100cd42945.herokuapp.com/')
+    axios.get('http://localhost:5555/employee')
       .then((response) => {
         setEmployees(response.data.data);
         setLoading(false);

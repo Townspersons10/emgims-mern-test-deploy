@@ -24,7 +24,7 @@ mongoose.connect(process.env.mongoDB_URI)
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => res.send('Welcome to the Employee Inventory Management System!'));
+app.get('/', (req, res) => res.sendFile(path.resolve(___dirname, '..', 'frontend', 'dist', 'index.html')));
 
 app.use('/employee', employeeRoute);
 
@@ -37,10 +37,6 @@ app.use((err, req, res, next) => {
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static( 'frontend/dist'));
-
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
-    });
 }
 
 
