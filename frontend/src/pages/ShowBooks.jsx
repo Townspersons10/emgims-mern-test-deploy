@@ -12,7 +12,7 @@ const ShowPersonInventory = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://hiroharuharku-a3bf081dd17c.herokuapp.com/employee/${id}`)
+      .get(`https://mern-stack-acc-61100cd42945.herokuapp.com/employee/${id}`)
       .then((response) => {
           setPerson(response.data);
           setLoading(false);

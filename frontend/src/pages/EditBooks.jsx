@@ -30,7 +30,7 @@ const EditPersonInventory = () => {
         const data = { name, inventoryItems };
 
         setLoading(true);
-        axios.put(`https://hiroharuharku-a3bf081dd17c.herokuapp.com/employee/${id}`, data)
+        axios.put(`https://mern-stack-acc-61100cd42945.herokuapp.com/employee/${id}`, data)
             .then(() => {
                 setLoading(false);
                 navigate('/');

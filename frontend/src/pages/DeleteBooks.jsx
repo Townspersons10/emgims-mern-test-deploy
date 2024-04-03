@@ -14,7 +14,7 @@ const DeletePersonInventory = () => {
     const handleDeletePersonInventory = () => {
         setLoading(true); // Show loading indicator
         axios
-            .delete(`https://hiroharuharku-a3bf081dd17c.herokuapp.com/employee/${id}`) // Adjust the endpoint as necessary
+            .delete(`https://mern-stack-acc-61100cd42945.herokuapp.com/employee/${id}`) // Adjust the endpoint as necessary
             .then(() => {
                 setLoading(false); // Hide loading indicator on success
                 navigate('/'); // Navigate back to the homepage or relevant page after deletion
