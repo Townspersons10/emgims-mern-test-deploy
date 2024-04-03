@@ -1,13 +1,7 @@
-import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
-export default defineConfig({
-  plugins: [reactRefresh()],  
-  publicDir: 'assets',
-  build: {
-    rollupOptions: {      
-      external: ['/assets/index-D4cvZ89r.js'],
-      input: 'dist/index.html',
-    },
-  },
-});
+// https://vitejs.dev/config/
+export default defineConfig({  
+  plugins: [react()],
+})
