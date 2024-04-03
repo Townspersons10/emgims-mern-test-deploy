@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
@@ -11,5 +10,9 @@
   "license": "ISC",
   "engines": {
     "node": "16.17.0"
+  },
+  "dependencies": {
+    "node": "^18.20.0",
+    "vite": "^5.2.7"
   }
 }
