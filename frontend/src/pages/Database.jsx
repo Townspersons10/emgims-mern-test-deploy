@@ -17,7 +17,7 @@ const Database = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get('http://localhost:5555/employee')
+        axios.get('https://mern-stack-acc-61100cd42945.herokuapp.com/employee')
             .then((response) => {
                 setEmployees(response.data.data);
                 setLoading(false);

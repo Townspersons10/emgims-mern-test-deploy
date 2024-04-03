@@ -13,7 +13,7 @@ const EditPersonInventory = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`http://localhost:5555/employee/${id}`)
+        axios.get(`https://mern-stack-acc-61100cd42945.herokuapp.com/employee/${id}`)
             .then((response) => {
                 setName(response.data.name);
                 setInventoryItems(response.data.inventoryItems);
@@ -30,7 +30,7 @@ const EditPersonInventory = () => {
         const data = { name, inventoryItems };
 
         setLoading(true);
-        axios.put(`http://localhost:5555/employee/${id}`, data)
+        axios.put(`https://mern-stack-acc-61100cd42945.herokuapp.com/employee/${id}`, data)
             .then(() => {
                 setLoading(false);
                 navigate('/');
