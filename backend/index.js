@@ -6,12 +6,17 @@ import { fileURLToPath } from 'url';
 import employeeRoute from './routes/employeeRoute.js';
 import path from 'path';
 import dotenv from 'dotenv'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
 
 const app = express();
+
 const PORT = process.env.PORT || 5555;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 
 // Attempt to connect to MongoDB
@@ -24,20 +29,19 @@ mongoose.connect(process.env.mongoDB_URI)
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => res.sendFile(path.resolve(___dirname, '..', 'frontend', 'dist', 'index.html')));
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
+    });
+}
 
 app.use('/employee', employeeRoute);
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
-
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static( 'frontend/dist'));
-}
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
