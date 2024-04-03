@@ -8,5 +8,8 @@
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "16.17.0"
+  }
 }
