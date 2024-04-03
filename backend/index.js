@@ -18,6 +18,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 
+console.log(`MongoDB URI: ${process.env.mongoDB_URI}`);
+
 // Attempt to connect to MongoDB
 mongoose.connect(process.env.mongoDB_URI)
     .then(() => console.log('Successfully connected to MongoDB.'))
