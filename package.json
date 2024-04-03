@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {    
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
+  },
   "author": "",
   "license": "ISC",
   "engines": {
