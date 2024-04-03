@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import { PersonInventory } from './models/personInventoryModel.js'; // Importing the Book model
 import { fileURLToPath } from 'url';
 import employeeRoute from './routes/employeeRoute.js';
 import path from 'path';
@@ -47,15 +46,3 @@ app.use((err, req, res, next) => {
 
 app.listen(process.env.PORT || 5555, () => 
     console.log(`Server running on port ${PORT}`));
-
-
-
-
-
-
-
-
-
-
-
-
