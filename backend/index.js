@@ -23,8 +23,6 @@ mongoose.connect(process.env.mongoDB_URI)
     .then(() => console.log('Successfully connected to MongoDB.'))
     .catch(err => console.error('Connection error', err));
 
-
-
 app.use(express.json());
 app.use(cors());
 
@@ -35,6 +33,8 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
+app.get('/', (req, res) => res.send('Welcome to the Employee Inventory Management System!'));
+
 app.use('/employee', employeeRoute);
 
 app.use((err, req, res, next) => {
@@ -44,4 +44,15 @@ app.use((err, req, res, next) => {
 
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
+
+
+
+
+
+
+
+
 
